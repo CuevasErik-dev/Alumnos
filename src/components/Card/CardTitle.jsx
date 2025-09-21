@@ -2,9 +2,11 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
 
+const RightContent = props => <Avatar.Icon {...props} icon="cog" size={35}  style={{marginRight:10}}/>
+
 const CardTitle = () => (
     <Card style={style.estilocard}>
-        <Card.Title title="Alumnos" titleStyle={style.styleTitle} /* left={LeftContent} */ />
+        <Card.Title title="Alumnos" titleStyle={style.styleTitle} right={RightContent} />
     </Card>
 );
 
@@ -17,8 +19,10 @@ const style = StyleSheet.create({
         borderRadius:20,
     },
     styleTitle:{
+        justifyContent:'center',
         textAlign:'center',
-        fontSize:18,
-        fontWeight:'bold'
+        fontSize:25,
+        fontWeight:'bold',
+        paddingLeft:50
     },
 });
