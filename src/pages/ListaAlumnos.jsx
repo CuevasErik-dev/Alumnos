@@ -4,33 +4,29 @@ import CardBusqueda from "../components/Card/CardBusqueda";
 import { ScrollView, StyleSheet } from "react-native";
 
 const ListaAlumnos = () => (
-    <PaperProvider>
-        <SafeAreaView style={{ flex: 1 }} edges={['top', 'left', 'right']}>
-            <CardBusqueda />
-            <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
-                <Card style={style.card}>
-                    <Card.Content>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item, index) => (
-                            <List.Item
-                                key={index}
-                                title="First Item"
-                                description="Item description"
-                                left={props => <List.Icon {...props} icon="account" />}
-                            />
-                        ))}
-                    </Card.Content>
-                </Card>
-            </ScrollView>
-        </SafeAreaView>
-    </PaperProvider>
+    <SafeAreaView style={{ flex: 1 }} edges={["top", "left", "right"]}>
+        <CardBusqueda />
+        <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
+            <Card style={style.card}>
+                <Card.Content>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((item, index) => (
+                        <List.Item
+                            key={index}
+                            title="First Item"
+                            description="Item description"
+                            left={(props) => <List.Icon {...props} icon="account" />}
+                        />
+                    ))}
+                </Card.Content>
+            </Card>
+        </ScrollView>
+    </SafeAreaView>
 );
 
 export default ListaAlumnos;
 
 const style = StyleSheet.create({
-    Content: {
-
-    },
+    Content: {},
     card: {
         marginHorizontal: 15,
         marginVertical: 5,
@@ -38,5 +34,3 @@ const style = StyleSheet.create({
         elevation: 2,
     },
 });
-
-
