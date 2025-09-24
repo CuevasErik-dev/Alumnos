@@ -5,7 +5,7 @@ import { ScrollView, StyleSheet } from "react-native";
 
 const ListaAlumnos = () => (
     <SafeAreaView style={{ flex: 1 }} edges={["top", "left", "right"]}>
-        <CardBusqueda />
+        {/* <CardBusqueda /> */}
         <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
             <Card style={style.card}>
                 <Card.Content>

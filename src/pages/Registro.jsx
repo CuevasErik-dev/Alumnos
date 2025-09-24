@@ -7,7 +7,7 @@ const Registro = () => {
 
     return(    
         <SafeAreaView style={[ style.Content]} edges={['top', 'left', 'right']} >
-            <CardBusqueda />
+            {/* <CardBusqueda /> */}
             <ScrollView contentContainerStyle={[{ paddingBottom: 10 },]}>
                 <Card style={[style.card,]}>
                     <Card.Title
