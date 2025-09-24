@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
             position: 'absolute',
             top: 40,
             right: 20,
-            zIndex: 10, // para que quede encima de todo
+            zIndex: 10, 
             backgroundColor: '#00000050',
             borderRadius: 50,
             padding: 8,

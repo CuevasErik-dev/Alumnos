@@ -49,10 +49,6 @@ const Registro = () => {
                             buttonColor="blue">
                             Editar
                         </Button>
-                        <Button icon="delete" mode="contained" onPress={() => console.log('Pressed')}
-                            buttonColor="red">
-                            Eliminar
-                        </Button>
                     </Card.Content>
                 </Card>
             </ScrollView>

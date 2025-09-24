@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MD3LightTheme } from "react-native-paper";
 
+
 const Tema = () => {
     const [bgColor, setBgColor] = useState("#ecc9c9ff");
 
@@ -18,7 +19,6 @@ const Tema = () => {
         },
     };
 
-    // 👇 devuelves tanto el tema como la función para cambiar
     return { theme, cambiarFondo };
 };
 

@@ -11,7 +11,7 @@ const Home = () => {
 
     return (
     <SafeAreaView style={[style.container, ]}>
-        <CardTitle />
+        {/* <CardTitle /> */}
         <Card.Content style={style.Content}>
             <Text variant='headlineLarge' style={[style.texto,]}> Bienvenido </Text>
             <Avatar.Image size={200}
