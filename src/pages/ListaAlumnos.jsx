@@ -3,10 +3,11 @@ import { PaperProvider, Card } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import AlumnoItem from "../components/Botones/AlumnoItem";
+import ModalEdicionAlumno from "../formulario/ModalEdicionAlumno";
 import { useAlumnos } from "../hooks/UseAlumnos";
 
 const ListaAlumnos = () => {
-    const { alumnos, loading, error, handleEditar, handleEliminar } = useAlumnos();
+    const { alumnos, loading, error, handleEditar, handleEliminar, modalVisible, alumnoEditar, handleGuardarCambios, cerrarModal } = useAlumnos();
 
     if (loading) {
         return (
@@ -38,8 +39,8 @@ const ListaAlumnos = () => {
                                         <AlumnoItem
                                             key={alumno.id || index}
                                             alumno={alumno}
-                                            onEditar={handleEditar}
-                                            onEliminar={handleEliminar}
+                                            onEditar={() => handleEditar(alumno)}
+                                            onEliminar={() => handleEliminar(alumno)}
                                         />
                                     ))
                                 )}
@@ -47,6 +48,12 @@ const ListaAlumnos = () => {
                         </Card.Content>
                     </Card>
                 </ScrollView>
+                <ModalEdicionAlumno
+                    visible={modalVisible}
+                    alumno={alumnoEditar}
+                    onGuardar={handleGuardarCambios}
+                    onCancelar={cerrarModal}
+                />
             </SafeAreaView>
         </PaperProvider>
     );

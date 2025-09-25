@@ -69,4 +69,67 @@ router.post("/crear-alumno", async (req, res) => {
     }
 });
 
+router.put("/editar-alumno", async (req, res) => {
+    try {  
+        const {
+            id,
+            nombre,
+            apellido,
+            carrera,
+            gmail,
+            numero_control,
+            telefono,
+            imagenurl,
+        } = req.body;
+
+        // Validar que el ID esté presente
+        if (!id) {
+            return res.status(400).json({
+                error: "El ID del alumno es requerido",
+            });
+        }
+
+        // Validar campos requeridos
+        if (!nombre || !apellido || !carrera || !gmail || !numero_control) {
+            return res.status(400).json({
+                error: "Faltan campos requeridos: nombre, apellido, carrera, gmail, numero_control",
+            });
+        }
+
+        // Validar formato de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(gmail)) {
+            return res.status(400).json({
+                error: "El formato del email no es válido",
+            });
+        }
+
+        const query = `UPDATE alumno SET nombre = ?, apellido = ?, carrera = ?, gmail = ?, numero_control = ?, telefono = ?, imagenurl = ? WHERE id = ?`;
+        const [result] = await db
+            .promise()
+            .query(query, [
+                nombre,
+                apellido,
+                carrera,
+                gmail,
+                numero_control,
+                telefono || null,
+                imagenurl || null,
+                id,
+            ]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Alumno no encontrado" });
+        }     
+
+        res.json({ 
+            success: true, 
+            message: "Alumno actualizado exitosamente",
+            id: id 
+        });
+    } catch (error) {
+        console.error("Error al editar alumno:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
+});
 module.exports = router;

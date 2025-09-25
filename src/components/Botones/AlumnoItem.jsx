@@ -22,7 +22,7 @@ const AlumnoItem = ({ alumno, onEditar, onEliminar }) => {
             right={(props) => (
                 <View style={styles.actionsContainer}>
                     <TouchableOpacity
-                        onPress={() => onEditar(alumno.id)}
+                        onPress={() => onEditar(alumno)}
                         style={styles.editButton}
                     >
                         <Ionicons name="pencil-outline" size={25} color="blue" />
