@@ -3,10 +3,6 @@ import { Card, Text, Avatar, useTheme, Icon } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 
-/* importacion de componentes */
-import CardTitle from '../components/Card/CardTitle';
-
-
 const Home = () => {
 
     return (
