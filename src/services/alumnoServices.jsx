@@ -5,7 +5,11 @@ export const alumnoService = {
     crearAlumno: async (alumnoData) => {
         try {
             const response = await api.post('/alumnos/crear-alumno', alumnoData);
-            return response.data;
+            if (response.data){
+                return response.data;
+            }else{
+                throw new Error('no se cargaroan los datos');
+            }
         } catch (error) {
             throw new Error(`Error al crear alumno: ${error.response?.data?.message || error.message}`);
         }
