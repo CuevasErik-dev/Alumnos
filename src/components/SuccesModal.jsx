@@ -14,7 +14,7 @@ const SuccessModal = ({ visible, alumno, onClose }) => {
                 <Card style={styles.modalCard}>
                     <Ionicons name="checkmark-circle" size={54} color="green" style={styles.icon} />
                     <Card.Content>
-                        <Text style={styles.text}>Alumno Registrado</Text>
+                        <Text style={styles.text}>Proceso Completado</Text>
                         <Button mode="contained" onPress={onClose} style={styles.button}>Aceptar</Button>
                     </Card.Content>
                 </Card>

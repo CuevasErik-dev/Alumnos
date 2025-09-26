@@ -13,7 +13,7 @@ const AlumnoItem = ({ alumno, onEditar, onEliminar }) => {
                     {...props}
                     icon={() => (
                         <Image
-                            source={{ uri: alumno.imagenurl }}
+                            source={{ uri: alumno.imagenurl || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgpnmY-O9iz09Jka-vGvK2Lv-U-pL3H18CfA&s" }}
                             style={styles.avatar}
                         />
                     )}

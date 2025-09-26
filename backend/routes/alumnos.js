@@ -34,6 +34,10 @@ router.post("/crear-alumno", async (req, res) => {
             });
         }
 
+        const imagenPorDefecto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgpnmY-O9iz09Jka-vGvK2Lv-U-pL3H18CfA&s";
+        const imagenFinal = imagenurl || imagenPorDefecto;
+
+
         const query = `INSERT INTO alumno (nombre, apellido, carrera, gmail, numero_control, telefono, imagenurl) 
                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
@@ -43,10 +47,10 @@ router.post("/crear-alumno", async (req, res) => {
                 nombre,
                 apellido,
                 carrera,
-                gmail,
+                gmail, 
                 numero_control,
                 telefono,
-                imagenurl || "",
+                imagenFinal
             ]);
 
         res.json({
@@ -88,7 +92,6 @@ router.put("/editar-alumno", async (req, res) => {
                 error: "El ID del alumno es requerido",
             });
         }
-
         // Validar campos requeridos
         if (!nombre || !apellido || !carrera || !gmail || !numero_control) {
             return res.status(400).json({
