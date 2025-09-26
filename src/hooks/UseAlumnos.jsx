@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 import api from '../services/api';
 
 export const useAlumnos = () => {
@@ -32,12 +33,12 @@ export const useAlumnos = () => {
         try {
             setLoading(true);
             console.log(' Datos a enviar:', {
-                id: alumnoEditar.id, 
+                id: alumnoEditar.id,
                 ...alumnoActualizado
             });
 
             const response = await api.put("/alumnos/editar-alumno", {
-                id: alumnoEditar.id, 
+                id: alumnoEditar.id,
                 ...alumnoActualizado
             });
 
@@ -64,15 +65,28 @@ export const useAlumnos = () => {
     }
 
     const handleEliminar = async (id) => {
-        try {
-            console.log('Eliminar alumno:', id);
-            // Aquí iría la lógica para eliminar
-            // await api.delete(`/alumnos/eliminar-alumno/${id}`);
-            // Recargar la lista después de eliminar
-            // cargarAlumnos();
-        } catch (error) {
-            console.error('Error al eliminar alumno:', error);
-        }
+        Alert.alert(
+            "Eliminar alumno",
+            "¿Estás seguro de eliminar este alumno?",
+            [
+                { text: "Cancelar", style: "cancel" },
+                {
+                    text: "Eliminar",
+                    onPress: async () => {
+                        try {
+                            setLoading(true);
+                            await api.delete("/alumnos/eliminar-alumno", { data: { id } });
+                            Alert.alert("Éxito", "Alumno eliminado");
+                            await cargarAlumnos();
+                        } catch (error) {
+                            Alert.alert("Error", error.response?.data?.error || "Error al eliminar");
+                        } finally {
+                            setLoading(false);
+                        }
+                    }
+                }
+            ]
+        );
     };
 
     useEffect(() => {

@@ -21,7 +21,7 @@ router.post("/crear-alumno", async (req, res) => {
             apellido,
             carrera,
             gmail,
-            numero_control ,
+            numero_control,
             telefono,
             imagenurl,
         } = req.body;
@@ -34,9 +34,9 @@ router.post("/crear-alumno", async (req, res) => {
             });
         }
 
-        const imagenPorDefecto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgpnmY-O9iz09Jka-vGvK2Lv-U-pL3H18CfA&s";
+        const imagenPorDefecto =
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgpnmY-O9iz09Jka-vGvK2Lv-U-pL3H18CfA&s";
         const imagenFinal = imagenurl || imagenPorDefecto;
-
 
         const query = `INSERT INTO alumno (nombre, apellido, carrera, gmail, numero_control, telefono, imagenurl) 
                     VALUES (?, ?, ?, ?, ?, ?, ?)`;
@@ -47,10 +47,10 @@ router.post("/crear-alumno", async (req, res) => {
                 nombre,
                 apellido,
                 carrera,
-                gmail, 
+                gmail,
                 numero_control,
                 telefono,
-                imagenFinal
+                imagenFinal,
             ]);
 
         res.json({
@@ -74,7 +74,7 @@ router.post("/crear-alumno", async (req, res) => {
 });
 
 router.put("/editar-alumno", async (req, res) => {
-    try {  
+    try {
         const {
             id,
             nombre,
@@ -95,7 +95,8 @@ router.put("/editar-alumno", async (req, res) => {
         // Validar campos requeridos
         if (!nombre || !apellido || !carrera || !gmail || !numero_control) {
             return res.status(400).json({
-                error: "Faltan campos requeridos: nombre, apellido, carrera, gmail, numero_control",
+                error:
+                    "Faltan campos requeridos: nombre, apellido, carrera, gmail, numero_control",
             });
         }
 
@@ -123,16 +124,42 @@ router.put("/editar-alumno", async (req, res) => {
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ error: "Alumno no encontrado" });
-        }     
+        }
 
-        res.json({ 
-            success: true, 
+        res.json({
+            success: true,
             message: "Alumno actualizado exitosamente",
-            id: id 
+            id: id,
         });
     } catch (error) {
         console.error("Error al editar alumno:", error);
         res.status(500).json({ error: "Error interno del servidor" });
     }
 });
+
+router.delete("/eliminar-alumno", async (req, res) => {
+    try {
+        const { id } = req.body;
+
+        if (!id) {
+            return res.status(400).json({ error: "Se requiere el ID" });
+        }
+
+        const [result] = await db.promise().query(
+            'DELETE FROM alumno WHERE id = ?', 
+            [id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: "Alumno no encontrado" });
+        }
+
+        res.json({ message: "Alumno eliminado exitosamente" });
+
+    } catch (error) {
+        console.error("Error al eliminar alumno:", error);
+        res.status(500).json({ error: "Error al eliminar alumno" });
+    }
+});
+
 module.exports = router;

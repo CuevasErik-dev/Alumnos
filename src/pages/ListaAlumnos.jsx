@@ -37,10 +37,10 @@ const ListaAlumnos = () => {
                                 ) : (
                                     alumnos.map((alumno, index) => (
                                         <AlumnoItem
-                                            key={alumno.id || index}
+                                            key={alumno.id || `alumno-${index}`}
                                             alumno={alumno}
                                             onEditar={() => handleEditar(alumno)}
-                                            onEliminar={() => handleEliminar(alumno)}
+                                            onEliminar={() => handleEliminar(alumno.id)}
                                         />
                                     ))
                                 )}

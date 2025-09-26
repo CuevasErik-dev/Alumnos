@@ -33,7 +33,7 @@ export const alumnoService = {
     // Eliminar alumno
     eliminarAlumno: async (id) => {
         try {
-            const response = await api.delete(`/alumnos/${id}`);
+            const response = await api.delete(`/alumnos/eliminar-alumno/${id}`);
             return response.data;
         } catch (error) {
             throw new Error(`Error al eliminar alumno: ${error.response?.data?.message || error.message}`);
