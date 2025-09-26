@@ -3,10 +3,10 @@ import { MD3LightTheme } from "react-native-paper";
 
 
 const Tema = () => {
-    const [bgColor, setBgColor] = useState("#ecc9c9ff");
+    const [bgColor, setBgColor] = useState("#bbbeef");
 
     const cambiarFondo = () => {
-        setBgColor(bgColor === "#ecc9c9ff" ? "#9fb5c9ff" : "#ecc9c9ff");
+        setBgColor(bgColor === "#bbbeef" ? "#a7bcf7" : "#bbbeef");
     };
 
     const theme = {

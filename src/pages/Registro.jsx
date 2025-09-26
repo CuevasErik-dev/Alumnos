@@ -15,6 +15,7 @@ const Registro = () => {
         alumnoRegistrado,
         handleInputChange,
         handleRegistrar,
+        handleLimpiar,
         setAlumnoRegistrado
     } = useAlumnoForm();
 
@@ -34,7 +35,8 @@ const Registro = () => {
         }
     };
 
-    const handleLimpiar = () => {
+    const handleLimpiarform = async () => {
+        const result = await handleLimpiar();
         setSnackbar({ visible: true, message: 'Formulario limpiado' });
     };
 
@@ -47,7 +49,7 @@ const Registro = () => {
                     loading={loading}
                     onInputChange={handleInputChange}
                     onRegistrar={handleRegistrarConFeedback}
-                    onLimpiar={handleLimpiar}
+                    onLimpiar={handleLimpiarform}
                 />
             </ScrollView>
 

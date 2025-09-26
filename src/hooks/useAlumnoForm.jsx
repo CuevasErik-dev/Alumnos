@@ -30,6 +30,13 @@ export const useAlumnoForm = () => {
 
         return null;
     };
+    const handleLimpiar = async () =>{
+        setFormData({
+            nombre: '', apellido: '', carrera: '', gmail: '',
+                numero_control: '', telefono: '', imagenurl: ''
+        });
+    };
+
     const handleRegistrar = async () => {
         setLoading(true);
 
@@ -65,6 +72,7 @@ export const useAlumnoForm = () => {
         alumnoRegistrado,
         handleInputChange,
         handleRegistrar,
-        setAlumnoRegistrado
+        setAlumnoRegistrado,
+        handleLimpiar
     };
 };

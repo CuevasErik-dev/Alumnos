@@ -30,13 +30,16 @@ const AlumnoForm = ({ formData, loading, onInputChange, onRegistrar, onLimpiar }
                 <TextInput label="URL de Imagen" value={formData.imagenurl}
                     onChangeText={(text) => onInputChange('imagenurl', text)} />
 
-                <Button mode="contained" onPress={onRegistrar} loading={loading}>
+                <Button buttonColor="#5ac25dff" onPress={onRegistrar} loading={loading} textColor='#fff'>
                     Registrar
+                </Button>
+                <Button buttonColor="#f5121dff" onPress={onLimpiar} loading={loading} textColor='#fff'>
+                    Limpiar Formulario
                 </Button>
             </Card.Content>
         </Card>
 
-        
+
     );
 };
 
