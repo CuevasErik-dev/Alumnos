@@ -4,12 +4,7 @@ export const alumnoService = {
     // Crear nuevo alumno
     crearAlumno: async (alumnoData) => {
         try {
-            const response = await api.post('/alumnos/crear-alumno', alumnoData);
-            if (response.data){
-                return response.data;
-            }else{
-                throw new Error('no se cargaroan los datos');
-            }
+            await api.post('/alumnos/crear-alumno',alumnoData);
         } catch (error) {
             throw new Error(`Error al crear alumno: ${error.response?.data?.message || error.message}`);
         }
@@ -19,7 +14,7 @@ export const alumnoService = {
     obtenerAlumnos: async () => {
         try {
             const response = await api.get('/alumnos/traer-alumnos');
-            return response.data;
+            return response.alumnoData;
         } catch (error) {
             throw new Error(`Error al obtener alumnos: ${error.response?.data?.message || error.message}`);
         }

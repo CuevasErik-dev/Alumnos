@@ -33,10 +33,6 @@ const AlumnoForm = ({ formData, loading, onInputChange, onRegistrar, onLimpiar }
                 <Button mode="contained" onPress={onRegistrar} loading={loading}>
                     Registrar
                 </Button>
-
-                <Button mode="outlined" onPress={onLimpiar}>
-                    Limpiar
-                </Button>
             </Card.Content>
         </Card>
 

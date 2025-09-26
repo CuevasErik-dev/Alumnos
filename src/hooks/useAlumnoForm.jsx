@@ -18,9 +18,9 @@ export const useAlumnoForm = () => {
     const handleRegistrar = async () => {
         setLoading(true);
         try {
-            const resultado = await alumnoService.crearAlumno(formData);
+            await alumnoService.crearAlumno(formData);
             setAlumnoRegistrado({
-                id: resultado.id,
+                id: formData.id,
                 ...formData
             });
 
