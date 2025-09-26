@@ -1,14 +1,14 @@
 import React from "react";
 import { PaperProvider, Card } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button } from "react-native-paper";
 import AlumnoItem from "../components/Botones/AlumnoItem";
 import ModalEdicionAlumno from "../formulario/ModalEdicionAlumno";
 import { useAlumnos } from "../hooks/UseAlumnos";
-import { Button } from "react-native";
 
 const ListaAlumnos = () => {
-    const { alumnos, loading, error, handleEditar, handleEliminar, modalVisible, alumnoEditar, handleGuardarCambios, cerrarModal } = useAlumnos();
+    const { alumnos, loading, error, handleEditar, handleEliminar, modalVisible, alumnoEditar, handleGuardarCambios, cerrarModal, cargarAlumnos } = useAlumnos();
 
     if (loading) {
         return (
@@ -30,7 +30,9 @@ const ListaAlumnos = () => {
         <PaperProvider>
             <SafeAreaView style={{ flex: 1 }} edges={["top", "left", "right"]}>
                 <ScrollView contentContainerStyle={{ paddingBottom: 10 }} >
-                    
+                    <Button icon="refresh" mode="contained-tonal" onPress={cargarAlumnos} disabled={loading}>
+                        Refrescar
+                    </Button>
                     <Card style={styles.card}>
                         <Card.Content style={styles.cardContent}>
                             <View style={styles.listContainer}>
