@@ -5,6 +5,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import AlumnoItem from "../components/Botones/AlumnoItem";
 import ModalEdicionAlumno from "../formulario/ModalEdicionAlumno";
 import { useAlumnos } from "../hooks/UseAlumnos";
+import { Button } from "react-native";
 
 const ListaAlumnos = () => {
     const { alumnos, loading, error, handleEditar, handleEliminar, modalVisible, alumnoEditar, handleGuardarCambios, cerrarModal } = useAlumnos();
@@ -28,7 +29,8 @@ const ListaAlumnos = () => {
     return (
         <PaperProvider>
             <SafeAreaView style={{ flex: 1 }} edges={["top", "left", "right"]}>
-                <ScrollView contentContainerStyle={{ paddingBottom: 10 }}>
+                <ScrollView contentContainerStyle={{ paddingBottom: 10 }} >
+                    
                     <Card style={styles.card}>
                         <Card.Content style={styles.cardContent}>
                             <View style={styles.listContainer}>

@@ -15,9 +15,30 @@ export const useAlumnoForm = () => {
         setFormData(prev => ({ ...prev, [field]: value }));
     };
 
+    const validarFormulario = (data) => {
+        const camposObligatorios = ['nombre', 'apellido', 'carrera', 'gmail', 'numero_control'];
+        const camposVacios = camposObligatorios.filter(campo => !data[campo]?.trim());
+        
+        if (camposVacios.length > 0) {
+            return `Complete los campos obligatorios: ${camposVacios.join(', ')}`;
+        }
+
+        // Validar formato de email
+        if (data.gmail && !/\S+@\S+\.\S+/.test(data.gmail)) {
+            return 'Formato de email inválido';
+        }
+
+        return null;
+    };
     const handleRegistrar = async () => {
         setLoading(true);
+
         try {
+            const errorValidacion = validarFormulario(formData);
+            if (errorValidacion) {
+                return { success: false, error: errorValidacion };
+            }
+            
             const resultado = await alumnoService.crearAlumno(formData);
             setAlumnoRegistrado({
                 id: formData.id,

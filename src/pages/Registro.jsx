@@ -20,7 +20,6 @@ const Registro = () => {
 
     const [modalVisible, setModalVisible] = React.useState(false);
     const [snackbar, setSnackbar] = React.useState({ visible: false, message: '' });
-    const [snackbarMessage, setSnackbarMessage] = React.useState('');
     
     const mostrarSnackbar = (message, type = 'default') => {
         setSnackbar({ visible: true, message, type });
@@ -36,7 +35,6 @@ const Registro = () => {
     };
 
     const handleLimpiar = () => {
-        // Lógica para limpiar
         setSnackbar({ visible: true, message: 'Formulario limpiado' });
     };
 

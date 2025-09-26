@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import api from '../services/api';
+import { useIsFocused } from '@react-navigation/native';
 
 export const useAlumnos = () => {
     const [alumnos, setAlumnos] = useState([]);
@@ -22,6 +23,7 @@ export const useAlumnos = () => {
             setLoading(false);
         }
     };
+    
 
     const handleEditar = (alumno) => {
         console.log('Editando alumno:', alumno);
@@ -30,29 +32,52 @@ export const useAlumnos = () => {
     };
 
     const handleGuardarCambios = async (alumnoActualizado) => {
+        const validarFormulario = (data) => {
+            const camposObligatorios = ['nombre', 'apellido', 'carrera', 'gmail', 'numero_control'];
+            const camposVacios = camposObligatorios.filter(campo => !data[campo]?.trim());
+            if (camposVacios.length > 0) {
+                return `Complete los campos obligatorios: ${camposVacios.join(', ')}`;
+            }
+            // Validar formato de email
+            if (data.gmail && !/\S+@\S+\.\S+/.test(data.gmail)) {
+                return 'Formato de email inválido';
+            }
+            return null;
+        };
         try {
+            const errorValidacion = validarFormulario(alumnoActualizado);
+            if (errorValidacion) {
+                // Usar Alert para mostrar error de validación
+                Alert.alert("Error", errorValidacion);
+                return;
+            }
             setLoading(true);
-            console.log(' Datos a enviar:', {
+            console.log('Datos a enviar:', {
                 id: alumnoEditar.id,
                 ...alumnoActualizado
             });
-
             const response = await api.put("/alumnos/editar-alumno", {
                 id: alumnoEditar.id,
                 ...alumnoActualizado
             });
-
-            console.log(' Respuesta del backend:', response.data);
-
-            // Actualizar la lista local
+            console.log('Respuesta del backend:', response.data);
+            // Usar Alert para mostrar éxito
+            Alert.alert("Éxito", "Alumno editado correctamente");
             setAlumnos(prevAlumnos => prevAlumnos.map(alumno =>
                 alumno.id === alumnoEditar.id ? { ...alumno, ...alumnoActualizado } : alumno
-            ));
-
+            )); 
             cerrarModal();
-
         } catch (error) {
             console.error('Error al guardar cambios:', error);
+
+            // Usar Alert para mostrar errores de API
+            if (error.response?.status === 400) {
+                Alert.alert("Error", "Datos inválidos o incompletos");
+            } else if (error.message?.includes("Network Error")) {
+                Alert.alert("Error", "Error de conexión");
+            } else {
+                Alert.alert("Error", "Error al editar alumno");
+            }
         } finally {
             setLoading(false);
         }
@@ -104,5 +129,7 @@ export const useAlumnos = () => {
         cargarAlumnos,
         handleEditar,
         handleEliminar
+
     };
+
 };
